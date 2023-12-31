@@ -37,7 +37,6 @@ export const ProductsProvider = ({ children }) => {
   };
 
   // Fetch Products with Axios
-
   const fetchProducts = async (url) => {
     dispatch({ type: GET_PRODUCTS_BEGIN });
     try {
@@ -48,8 +47,13 @@ export const ProductsProvider = ({ children }) => {
       dispatch({ type: GET_PRODUCTS_ERROR });
     }
   };
+  // useEffect for the **Featured Products** not single Products. 
+  useEffect(() => {
+    fetchProducts(url);
+  }, []);
+  //End of Fetch Products with Axios
 
-  // Fetch Single Products
+  // Fetch Single Products with Axios
   const fetchSingleProduct = async (url) => {
     dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
     try {
@@ -60,10 +64,8 @@ export const ProductsProvider = ({ children }) => {
       dispatch({ type: GET_SINGLE_PRODUCT_ERROR });
     }
   };
+  //End of Fetch Single Products with Axios
 
-  useEffect(() => {
-    fetchProducts(url);
-  }, []);
 
   return (
     <ProductsContext.Provider
