@@ -23,7 +23,7 @@ const SingleProductPage = () => {
     single_product: product,
     fetchSingleProduct,
   } = useProductsContext();
-
+  // console.log(product);
   useEffect(() => {
     fetchSingleProduct(`${url}${id}`);
   }, [id]);
@@ -45,8 +45,52 @@ const SingleProductPage = () => {
     return <Error />;
   }
 
-  console.log(product);
-  return <h4>single product page</h4>;
+  const {
+    name,
+    price,
+    description,
+    stock,
+    stars,
+    reviews,
+    id: sku,
+    company,
+    images,
+  } = product;
+
+  // console.log(product);
+  return (
+    <Wrapper>
+      <PageHero title={name} product />
+      <div className='section section-center page'>
+        <Link to='/products' className='btn'>
+          back to products
+        </Link>
+        <div className='product-center'>
+          <ProductImages images={images} />
+          <section className='centent'>
+            <h2>{name}</h2>
+            <Stars />
+            <h5 className='price'>{formatPrice(price)}</h5>
+            <p className='desc'>{description}</p>
+            <p className='info'>
+              <span>Available :</span>
+              {stock > 0 ? "In Stock" : "Out of Stock"}
+            </p>
+            <p className='info'>
+              <span>Sku :</span>
+              {sku}
+            </p>
+            <p className='info'>
+              <span>Brand :</span>
+              {company}
+            </p>
+            <hr />
+            {stock > 0 && <AddToCart />}
+          </section>
+        </div>
+      </div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.main`

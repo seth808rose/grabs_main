@@ -47,7 +47,7 @@ export const ProductsProvider = ({ children }) => {
       dispatch({ type: GET_PRODUCTS_ERROR });
     }
   };
-  // useEffect for the **Featured Products** not single Products. 
+  // useEffect for the **Featured Products** not single Products.
   useEffect(() => {
     fetchProducts(url);
   }, []);
@@ -59,13 +59,13 @@ export const ProductsProvider = ({ children }) => {
     try {
       const response = await axios.get(url);
       const singleProduct = response.data;
+      // console.log(singleProduct);
       dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
     } catch (error) {
       dispatch({ type: GET_SINGLE_PRODUCT_ERROR });
     }
   };
   //End of Fetch Single Products with Axios
-
 
   return (
     <ProductsContext.Provider
